@@ -154,9 +154,6 @@ public class OntologyTreePanel extends JPanel {
   /**
    * This method finds out the ClassNode node in the ontology Tree for given
    * class
-   * 
-   * @param classValue
-   * @return
    */
   public ClassNode getFirstNode(String classValue) {
     // lets first convert this classValue into the className
@@ -174,10 +171,6 @@ public class OntologyTreePanel extends JPanel {
   /**
    * Internal recursive method to find out the Node for given class Value under
    * the heirarchy of given node
-   * 
-   * @param node
-   * @param classValue
-   * @return
    */
   private ClassNode getFirstClassNode(ClassNode node, String classValue) {
     if(node.toString().intern() == classValue.intern()) { return node; }
@@ -194,9 +187,6 @@ public class OntologyTreePanel extends JPanel {
   /**
    * This method finds out the ClassNode node in the ontology Tree for given
    * class
-   * 
-   * @param classValue
-   * @return
    */
   public List<ClassNode> getNode(String classValue) {
     // lets first convert this classValue into the className
@@ -214,10 +204,6 @@ public class OntologyTreePanel extends JPanel {
   /**
    * Internal recursive method to find out the Node for given class Value under
    * the heirarchy of given node
-   * 
-   * @param node
-   * @param classValue
-   * @return
    */
   private List<ClassNode> getClassNode(ClassNode node, String classValue) {
     List<ClassNode> cNodes = new ArrayList<ClassNode>();
@@ -327,7 +313,7 @@ public class OntologyTreePanel extends JPanel {
    * 
    * @param ontology
    *          - the ontology to be ploted
-   * @param currentOResourceName2AnnotationsListMap
+   * @param annotMap
    *          - the annotationMap which contains Key=concept(String)
    *          Value=annotations(ArrayList)
    */
@@ -398,9 +384,6 @@ public class OntologyTreePanel extends JPanel {
 
   /**
    * This method returns the properties available in the ontology
-   * 
-   * @param ontology
-   * @return
    */
   private Set<RDFProperty> obtainProperties(Ontology ontology) {
     Set<RDFProperty> toReturn = new HashSet<RDFProperty>();
@@ -423,9 +406,6 @@ public class OntologyTreePanel extends JPanel {
    * all set properties. For each set property, obtains its value and add it to
    * the returning map as a key. A set of direct classes of the instance then
    * becomes the value for this key.
-   * 
-   * @param ontology
-   * @return
    */
   private HashMap<String, Set<OClass>> obtainPVnInst2ClassesMap(
     Ontology ontology, Set<RDFProperty> propertySet) {
@@ -446,9 +426,6 @@ public class OntologyTreePanel extends JPanel {
    * all set properties. For each set property, obtains its value and add it to
    * the returning map as a key. A set of direct classes of the instance then
    * becomes the value for this key.
-   * 
-   * @param ontology
-   * @return
    */
   public void updatePVnInst2ClassesMap(OInstance anInst,
     Set<RDFProperty> propertySet, Set<OClass> classes,
@@ -553,8 +530,6 @@ public class OntologyTreePanel extends JPanel {
 
   /**
    * returns the currentOntologyTree Panel
-   * 
-   * @return
    */
   public Component getGUI() {
     return this;

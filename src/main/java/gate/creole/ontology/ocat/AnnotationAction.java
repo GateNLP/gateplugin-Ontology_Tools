@@ -43,7 +43,7 @@ public class AnnotationAction extends MouseInputAdapter {
   /**
    * Constructor
    * 
-   * @param ontologyTreePanel
+   * @param ontoTreePanel
    *          the instance this instance uses to obtain the information about
    *          ontology
    */

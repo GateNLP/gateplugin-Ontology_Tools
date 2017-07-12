@@ -13,9 +13,6 @@ public class Utils {
   /**
    * Given an Annotation this method gets the value of
    * gate.creole.ANNIEConstants.LOOKUP_CLASS_FEATURE_NAME feature.
-   * 
-   * @param annot
-   * @return
    */
   public static String getClassFeatureValue(gate.Annotation annot,
     OntologyViewerOptions options) {
@@ -36,9 +33,6 @@ public class Utils {
   /**
    * Given an Annotation this method gets the value of
    * gate.creole.ANNIEConstants.LOOKUP_INSTANCE_FEATURE_NAME feature.
-   * 
-   * @param annot
-   * @return
    */
   public static String getInstanceFeatureValue(gate.Annotation annot,
     OntologyViewerOptions options) {

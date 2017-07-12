@@ -7,20 +7,40 @@
  */
 package gate.creole.ontology.ocat;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
-import gate.*;
-import java.util.*;
+import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import gate.Document;
 import gate.event.DocumentEvent;
 import gate.event.DocumentListener;
 import gate.gui.MainFrame;
@@ -232,8 +252,6 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * The method disables the graphical selection of selectedAnnotationSetName
    * and will allow user to provide the annotationSetName explicitly
-   *
-   * @param annotationSetName
    */
   public void disableAnnotationSetSelection(String annotationSetName) {
     selectedAnnotationSetName = annotationSetName;
@@ -487,8 +505,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Returns the panel for ontoOption Panel
-   *
-   * @return
    */
   public Component getGUI() {
     return scroller;
@@ -905,8 +921,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Returns if case sensitive option is set to ON/OFF
-   *
-   * @return
    */
   public boolean isAddAllOptionCaseSensitive() {
     return addAllFeatureCaseSensitiveCB.isSelected();
@@ -955,8 +969,6 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * This methods implements the actions when any selectedAnnotationSetName is
    * removed from
-   *
-   * @param de
    */
   public void annotationSetRemoved(DocumentEvent de) {
     // String getSelected = (String)annotationSetsNamesCB.getSelectedItem();
@@ -968,8 +980,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Gets the URL of the filter file being used.
-   *
-   * @return
    */
   public URL getClassesToHideFileURL() {
     return classesToHideFileURL;
@@ -977,8 +987,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Sets the filter file to be used.
-   *
-   * @param classesToHideFileURL
    */
   public void setClassesToHideFileURL(URL filterFileURL) {
     this.classesToHideFileURL = filterFileURL;
@@ -989,8 +997,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Gets the URL of the filter file being used.
-   *
-   * @return
    */
   public URL getClassesToShowFileURL() {
     return classesToShowFileURL;
@@ -998,8 +1004,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Sets the filter file to be used.
-   *
-   * @param classesToHideFileURL
    */
   public void setClassesToShowFileURL(URL filterFileURL) {
     this.classesToShowFileURL = filterFileURL;
@@ -1010,8 +1014,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Gets a set of ontology classes disabled in the OCAT.
-   *
-   * @return
    */
   public HashSet<String> getClassesToHide() {
     return classesToHide;
@@ -1019,8 +1021,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Gets a set of ontology classes disabled in the OCAT.
-   *
-   * @return
    */
   public HashSet<String> getClassesToShow() {
     return classesToShow;
@@ -1034,8 +1034,6 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * This method should be called to specify the ontology classes that should be
    * disabled from the ocat.
-   *
-   * @param classesToHide
    */
   public void setClassesToHide(HashSet<String> ontologyClassesToFilterOut) {
     // ok here we need to create a temporary file and add these classes
@@ -1067,8 +1065,6 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * This method should be called to specify the ontology classes that should be
    * disabled from the ocat.
-   *
-   * @param classesToHide
    */
   public void setClassesToShow(HashSet<String> ontologyClassesToShow) {
     // ok here we need to create a temporary file and add these classes

@@ -1,22 +1,5 @@
 package gate.creole.ontology.ocat;
 
-import gate.Annotation;
-import gate.Factory;
-import gate.FeatureMap;
-import gate.Main;
-import gate.creole.ANNIEConstants;
-import gate.creole.AnnotationSchema;
-import gate.creole.FeatureSchema;
-import gate.creole.ontology.AnnotationProperty;
-import gate.creole.ontology.DatatypeProperty;
-import gate.creole.ontology.OClass;
-import gate.creole.ontology.OInstance;
-import gate.creole.ontology.OResource;
-import gate.creole.ontology.ObjectProperty;
-import gate.creole.ontology.RDFProperty;
-import gate.gui.MainFrame;
-import gate.util.GateRuntimeException;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -63,6 +46,23 @@ import javax.swing.tree.TreePath;
 import com.ontotext.gate.vr.ClassNode;
 import com.ontotext.gate.vr.IFolder;
 import com.ontotext.gate.vr.OntoTreeModel;
+
+import gate.Annotation;
+import gate.Factory;
+import gate.FeatureMap;
+import gate.Main;
+import gate.creole.ANNIEConstants;
+import gate.creole.AnnotationSchema;
+import gate.creole.FeatureSchema;
+import gate.creole.ontology.AnnotationProperty;
+import gate.creole.ontology.DatatypeProperty;
+import gate.creole.ontology.OClass;
+import gate.creole.ontology.OInstance;
+import gate.creole.ontology.OResource;
+import gate.creole.ontology.ObjectProperty;
+import gate.creole.ontology.RDFProperty;
+import gate.gui.MainFrame;
+import gate.util.GateRuntimeException;
 
 /**
  * @author niraj
@@ -1159,9 +1159,6 @@ public class AnnotationEditor extends AbstractAction {
   /**
    * Given the annotation, this method returns the annotation with same text and
    * same class feature.
-   * 
-   * @param annot
-   * @return
    */
   private ArrayList<Annotation> getSimilarAnnotations(gate.Annotation annot) {
     ArrayList<Annotation> annotations = new ArrayList<Annotation>();
@@ -1202,9 +1199,6 @@ public class AnnotationEditor extends AbstractAction {
 
   /**
    * Retrieves the underlying text of the annotation.
-   * 
-   * @param annot
-   * @return
    */
   private String getString(gate.Annotation annot) {
     return ontologyTreePanel.ontoViewer.getDocument().getContent().toString()

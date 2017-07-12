@@ -1340,7 +1340,7 @@ public class OntologyEditor extends AbstractVisualResource
    * classes and instances.
    * 
    * @param parent the parent node.
-   * @param children the List<OResource> of children objects.
+   * @param children the list of children objects.
    * @param comparator the Comparator used to sort the children.
    */
   protected void addChidrenRec(DefaultMutableTreeNode parent,

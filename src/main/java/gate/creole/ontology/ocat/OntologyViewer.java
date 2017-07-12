@@ -70,8 +70,8 @@ public class OntologyViewer extends AbstractDocumentView implements
 
   /**
    * AnnotationMap which stores all the relavant annotations (i.e. annotation
-   * with class feature) in the following way className --> ArrayList (which
-   * contains all the annotations) </p>
+   * with class feature) in the following way className --&gt; ArrayList (which
+   * contains all the annotations)
    */
   private HashMap<String, ArrayList<Annotation>> className2AnnotationList =
     new HashMap<String, ArrayList<Annotation>>();
@@ -861,8 +861,6 @@ public class OntologyViewer extends AbstractDocumentView implements
 
   /**
    * A method that returns the instance of ontology viewer options.
-   * 
-   * @return
    */
   public OntologyViewerOptions getOntologyViewerOptions() {
     /*

@@ -426,9 +426,6 @@ public class OntologyTreeListener extends MouseAdapter {
 
   /**
    * This method is to find out the path for this node from the root of the tree
-   * 
-   * @param node
-   * @return
    */
   public TreePath getTreePath(IFolder node) {
     IFolder root =
@@ -440,11 +437,6 @@ public class OntologyTreeListener extends MouseAdapter {
 
   /**
    * Internal method used to find out the tree path
-   * 
-   * @param currentNode
-   * @param nodeToFind
-   * @param path
-   * @return
    */
   private Object[] traverseThroughPath(IFolder currentNode, IFolder nodeToFind,
     Object[] path) {
@@ -529,8 +521,6 @@ public class OntologyTreeListener extends MouseAdapter {
   /**
    * Method to add a new annotation
    * 
-   * @param classValue
-   * @param all
    */
   public ArrayList<Annotation> addNewAnnotation(ClassNode node, boolean all,
     FeatureMap map, boolean isClassFeature, boolean shouldCreateInstance) {
