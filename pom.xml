@@ -36,6 +36,7 @@
 			<groupId>uk.ac.gate.plugins</groupId>
 			<artifactId>annie</artifactId>
 			<version>8.5-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
