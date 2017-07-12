@@ -221,8 +221,6 @@ public class OntologyViewerOptions implements DocumentListener {
 
   /**
    * Constructor
-   *
-   * @param ontologyTreePanel
    */
   public OntologyViewerOptions(OntologyTreePanel ontoTree) {
     this.ontologyTreePanel = ontoTree;
@@ -268,8 +266,6 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * This will reenable the graphical support for selecting
    * annotationSetsNamesCB
-   *
-   * @param annotationSetName
    */
   public void enabledAnnotationSetSelection() {
     otherAS.setEnabled(true);
