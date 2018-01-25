@@ -23,6 +23,7 @@ import com.ontotext.gate.vr.IFolder;
  * @author Niraj Aswani
  * @version 1.0
  */
+@SuppressWarnings("rawtypes")
 public class ComboRenderer extends JPanel implements ListCellRenderer {
 
   /**
@@ -106,7 +107,7 @@ public class ComboRenderer extends JPanel implements ListCellRenderer {
     // only once when that ontology is loaded for the first time
     if(ontologyTreePanel.currentOResource2ColorMap.containsKey(conceptName)) {
       Color color =
-        (Color)ontologyTreePanel.currentOResource2ColorMap.get(conceptName);
+        ontologyTreePanel.currentOResource2ColorMap.get(conceptName);
       labelPanel.setBackground(color);
       iconLabel.setBackground(Color.WHITE);
     }

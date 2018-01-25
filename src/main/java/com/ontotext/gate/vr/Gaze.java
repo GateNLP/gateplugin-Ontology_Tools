@@ -24,7 +24,7 @@ import java.io.*;
  *  gazetteer lists, linear definitions (lists.def files),
  *  and mapping definitions (mappings between ontology classes and gazetteer lists).
  *  I.e. capable of visualizing and editing both linear and ontology-aware gazetteers. */
-@SuppressWarnings({"rawtypes","unchecked"})
+@SuppressWarnings({"rawtypes","unchecked","cast","static-access"})
 public class Gaze extends AbstractVisualResource
   implements GazetteerListener, OntologyModificationListener {
 
