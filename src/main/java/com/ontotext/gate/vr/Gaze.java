@@ -24,9 +24,12 @@ import java.io.*;
  *  gazetteer lists, linear definitions (lists.def files),
  *  and mapping definitions (mappings between ontology classes and gazetteer lists).
  *  I.e. capable of visualizing and editing both linear and ontology-aware gazetteers. */
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Gaze extends AbstractVisualResource
   implements GazetteerListener, OntologyModificationListener {
 
+  private static final long serialVersionUID = 1391284732717175873L;
+  
   /** size x when running from the tools menu */
   public final static int SIZE_X = 700;
   /** size y when running from the tools menu */
@@ -582,7 +585,7 @@ public class Gaze extends AbstractVisualResource
   /** Reinitializes the edited gazetteer */
   private void reinitializeGazetteer() {
     try {
-      target.setListsURL(linear.getURL());
+      target.setListsURL(new ResourceReference(linear.getURL()));
       if (isOntoGaz) {
         ((OntoGazetteer)target).setMappingURL(mapping.getURL());
         gate.Factory.deleteResource(((OntoGazetteer)target).getGazetteer());
@@ -592,7 +595,7 @@ public class Gaze extends AbstractVisualResource
           "Gazetteer Reinitialized.",
           "Reinitialize Gazetteer",
           JOptionPane.INFORMATION_MESSAGE);
-    } catch(ResourceInstantiationException x) {
+    } catch(ResourceInstantiationException | URISyntaxException x) {
       JOptionPane.showMessageDialog(this,
         "Gazetteer can not be reinitialized.\n"+
         "due to:"+x.getClass()+" "+x.getMessage(),

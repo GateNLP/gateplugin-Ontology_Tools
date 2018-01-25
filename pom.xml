@@ -40,4 +40,6 @@
 		</dependency>
 	</dependencies>
 
+	<name>Ontology Tools</name>
+	<description>A collection of useful tools for working with ontologies in GATE Developer.</description>
 </project>

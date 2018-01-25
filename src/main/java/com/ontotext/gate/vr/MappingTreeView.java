@@ -199,6 +199,7 @@ public class MappingTreeView extends JTree {
 
   /*Action Listener of the insert pop up menu item */
   class InsertAL implements ActionListener {
+    @SuppressWarnings({"rawtypes","unchecked"})
     public void actionPerformed(ActionEvent e) {
       ClassNode node = (ClassNode)MappingTreeView.this.getLastSelectedPathComponent();
       Object source = node.getSource();
