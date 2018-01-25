@@ -24,7 +24,7 @@ import java.io.*;
  *  gazetteer lists, linear definitions (lists.def files),
  *  and mapping definitions (mappings between ontology classes and gazetteer lists).
  *  I.e. capable of visualizing and editing both linear and ontology-aware gazetteers. */
-@SuppressWarnings({"rawtypes","unchecked","cast","static-access"})
+@SuppressWarnings({"rawtypes","unchecked","cast"})
 public class Gaze extends AbstractVisualResource
   implements GazetteerListener, OntologyModificationListener {
 
@@ -279,7 +279,7 @@ public class Gaze extends AbstractVisualResource
 
         //retrieve the possible editions of the gazetteer
         if (null!=listArea && null!=gazList) {
-          gazList.setMode(gazList.STRING_MODE);
+          gazList.setMode(GazetteerList.STRING_MODE);
           boolean mdfd = gazList.isModified();
           gazList.updateContent(listArea.getText());
           gazList.setModified(mdfd);
@@ -288,7 +288,7 @@ public class Gaze extends AbstractVisualResource
         //show the newly selected list
         gazList = newList;
         if ( null!= gazList) {
-          gazList.setMode(gazList.STRING_MODE);
+          gazList.setMode(GazetteerList.STRING_MODE);
           boolean mdfd = gazList.isModified();
           listArea.setText(gazList.toString());
           gazList.setModified(mdfd);
@@ -369,7 +369,7 @@ public class Gaze extends AbstractVisualResource
 
               //retrieve the possible editions of the gazetteer
               if (null!=listArea && null!=gazList) {
-                gazList.setMode(gazList.STRING_MODE);
+                gazList.setMode(GazetteerList.STRING_MODE);
                 boolean mdfd = gazList.isModified();
                 gazList.updateContent(listArea.getText());
                 gazList.setModified(mdfd);
@@ -378,7 +378,7 @@ public class Gaze extends AbstractVisualResource
               //show the newly selected list
               gazList = (GazetteerList)linear.getListsByNode().get(linearNode);
               if ( null!= gazList) {
-                gazList.setMode(gazList.STRING_MODE);
+                gazList.setMode(GazetteerList.STRING_MODE);
                 boolean mdfd = gazList.isModified();
                 listArea.setText(gazList.toString());
                 gazList.setModified(mdfd);
@@ -811,7 +811,7 @@ public class Gaze extends AbstractVisualResource
 
 /*---------implementation of GazetteerListener interface--------------*/
   public void processGazetteerEvent(GazetteerEvent e) {
-    if ( e.REINIT == e.getType() ) {
+    if ( GazetteerEvent.REINIT == e.getType() ) {
       displayLinear((Gazetteer)e.getSource());
       if (isOntoGaz) {
         displayMapping((Gazetteer)e.getSource());
@@ -1209,7 +1209,7 @@ public class Gaze extends AbstractVisualResource
               gazList = new GazetteerList();
               gazList.setURL(lurl);
               gazList.load();
-              gazList.setMode(gazList.STRING_MODE);
+              gazList.setMode(GazetteerList.STRING_MODE);
               // set the list data with the nodes of the gaz
               listArea.setText(gazList.toString());
               gazList.setModified(false);
@@ -1253,7 +1253,7 @@ public class Gaze extends AbstractVisualResource
               gazList = new GazetteerList();
               gazList.setURL(lurl);
               gazList.load();
-              gazList.setMode(gazList.STRING_MODE);
+              gazList.setMode(GazetteerList.STRING_MODE);
 
               listArea.setText(gazList.toString());
 
@@ -1302,7 +1302,7 @@ public class Gaze extends AbstractVisualResource
                 lurl = new URL("file:///"+selected.getAbsolutePath());
                 gazList.setURL(lurl);
                 gazList.updateContent(listArea.getText());
-                gazList.setMode(gazList.LIST_MODE);
+                gazList.setMode(GazetteerList.LIST_MODE);
                 gazList.store();
                 JOptionPane.showMessageDialog(
                   Gaze.this,
@@ -1341,7 +1341,7 @@ public class Gaze extends AbstractVisualResource
 
             try {
               gazList.updateContent(listArea.getText());
-              gazList.setMode(gazList.LIST_MODE);
+              gazList.setMode(GazetteerList.LIST_MODE);
               gazList.store();
               JOptionPane.showMessageDialog(
                 Gaze.this,
@@ -1370,7 +1370,7 @@ public class Gaze extends AbstractVisualResource
               if (null!=gazList && null!=listArea) {
                 boolean mdf = gazList.isModified();
                 gazList.updateContent(listArea.getText());
-                gazList.setMode(gazList.LIST_MODE);
+                gazList.setMode(GazetteerList.LIST_MODE);
                 gazList.setModified(mdf);
               }
 
@@ -1388,7 +1388,7 @@ public class Gaze extends AbstractVisualResource
                 try {
                   if (gl.isModified()) {
                     anythingHappened = true;
-                    gl.setMode(gl.LIST_MODE);
+                    gl.setMode(GazetteerList.LIST_MODE);
                     gl.store();
                     allListsStr.append("\nSAVED : "+
                       node.getList());
@@ -1513,6 +1513,8 @@ public class Gaze extends AbstractVisualResource
 
   /**A dialog for input of a LinearNode. */
   class LinearNodeInput extends JDialog {
+
+    private static final long serialVersionUID = 7219277626253215166L;
     /** the action that has been performed */
     private int action = -1;
     /** the position at which the action has been performed */
@@ -1715,7 +1717,7 @@ public class Gaze extends AbstractVisualResource
           public void keyTyped(KeyEvent kev){}
 
           public void keyReleased(KeyEvent kev) {
-            if (kev.VK_ENTER == kev.getKeyCode()) {
+            if (KeyEvent.VK_ENTER == kev.getKeyCode()) {
               LinearNode ln = new LinearNode(
                   (String)listCombo.getSelectedItem(),
                   (String)majorCombo.getSelectedItem(),
@@ -1726,7 +1728,7 @@ public class Gaze extends AbstractVisualResource
               dispose();
             } // if enter
             else {
-              if (kev.VK_ESCAPE == kev.getKeyCode()) {
+              if (KeyEvent.VK_ESCAPE == kev.getKeyCode()) {
                 dispose();
               } // if escape
             } // else
