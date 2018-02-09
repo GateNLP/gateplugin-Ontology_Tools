@@ -3,7 +3,7 @@
 <!-- creole.xml directory file for GATE builtins -->
 <CREOLE-DIRECTORY> 
 
-  <REQUIRES GROUP="uk.ac.gate.plugins" ARTIFACT="annie" VERSION="8.5-SNAPSHOT"/>
+  <REQUIRES GROUP="uk.ac.gate.plugins" ARTIFACT="annie" VERSION="8.5-alpha1"/>
   
   <!-- Processing Resources -->
   <CREOLE>
