@@ -260,7 +260,7 @@ public class OntologyClassView extends AbstractDocumentView
     }});
     // show the instance view at the bottom
     if (!instanceView.isActive()) {
-      owner.setBottomView(owner.horizontalViews.indexOf(instanceView));
+      owner.setBottomView(owner.getHorizontalViews().indexOf(instanceView));
     }
   }
 
@@ -794,9 +794,9 @@ public class OntologyClassView extends AbstractDocumentView
       }
       // check for annotations at mouse location
       String setName = (String) setComboBox.getSelectedItem();
-      for (Annotation annotation : document.getAnnotations(setName)
+      for (Annotation annotation : getDocument().getAnnotations(setName)
             .get(ANNOTATION_TYPE).get(Math.max(0l, textLocation-1),
-              Math.min(document.getContent().size(), textLocation+1))) {
+              Math.min(getDocument().getContent().size(), textLocation+1))) {
         final FeatureMap features = annotation.getFeatures();
         if (features.get(ONTOLOGY) != null
          && features.get(CLASS) != null

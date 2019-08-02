@@ -314,7 +314,7 @@ public class OntologyInstanceView extends AbstractDocumentView {
   protected void registerHooks() {
     // show the class view at the right
     if (!classView.isActive()) {
-      owner.setRightView(owner.verticalViews.indexOf(classView));
+      owner.setRightView(owner.getVerticalViews().indexOf(classView));
     }
   }
 
