@@ -68,12 +68,12 @@ import gate.util.GateRuntimeException;
  * @author niraj
  * 
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "rawtypes"})
 public class AnnotationEditor extends AbstractAction {
 
   protected JWindow annotationWindow;
 
-  protected JComboBox typeCombo;
+  protected JComboBox<ClassNode> typeCombo;
 
   protected JCheckBox applyToAll;
 
@@ -233,7 +233,7 @@ public class AnnotationEditor extends AbstractAction {
     constraints.anchor = GridBagConstraints.CENTER;
     constraints.insets = insets0;
 
-    typeCombo = new JComboBox();
+    typeCombo = new JComboBox<>();
     addChangeAnnotationAction = new AddChangeAnnotationAction();
     typeCombo.addActionListener(addChangeAnnotationAction);
     typeCombo.setRenderer(new ComboRenderer(ontologyTreePanel));
@@ -261,8 +261,8 @@ public class AnnotationEditor extends AbstractAction {
             for(int i = 0; i < items.size(); i++) {
               nodes[i] = items.get(i);
             }
-            DefaultComboBoxModel defaultcomboboxmodel =
-              new DefaultComboBoxModel(nodes);
+            DefaultComboBoxModel<ClassNode> defaultcomboboxmodel =
+              new DefaultComboBoxModel<>(nodes);
             typeCombo.setModel(defaultcomboboxmodel);
 
             try {
@@ -353,7 +353,7 @@ public class AnnotationEditor extends AbstractAction {
       if(ontologyTreePanel.showingAnnotationWindow) {
         gate.Annotation annotation =
           ontologyTreePanel.ontoTreeListener.highlightedAnnotations.get(indexes
-            .get(0).intValue());
+            .get(0));
         try {
           JTextArea textPane = ontologyTreePanel.ontoViewer.documentTextArea;
           Rectangle startRect =
@@ -381,29 +381,29 @@ public class AnnotationEditor extends AbstractAction {
 
       gate.Annotation annot =
         ontologyTreePanel.ontoTreeListener.highlightedAnnotations.get(indexes
-          .get(0).intValue());
+          .get(0));
       // ok we need to find out classes
       final ArrayList<String> classValues = new ArrayList<String>();
       final ArrayList<Boolean> isClass = new ArrayList<Boolean>();
       for(int i = 0; i < indexes.size(); i++) {
         gate.Annotation tempAnnot =
           ontologyTreePanel.ontoTreeListener.highlightedAnnotations.get(indexes
-            .get(i).intValue());
+            .get(i));
         if(tempAnnot.getFeatures().containsKey(
           ANNIEConstants.LOOKUP_INSTANCE_FEATURE_NAME)) {
           classValues.add(Utils.getInstanceFeatureValue(tempAnnot,
             ontologyTreePanel.ontologyViewerOptions));
-          isClass.add(new Boolean(false));
+          isClass.add(Boolean.FALSE);
         }
         else {
           classValues.add(Utils.getClassFeatureValue(tempAnnot,
             ontologyTreePanel.ontologyViewerOptions));
-          isClass.add(new Boolean(true));
+          isClass.add(Boolean.TRUE);
         }
       }
 
       if(classValues.size() == 1) {
-        selectedAnnotationIndex = indexes.get(0).intValue();
+        selectedAnnotationIndex = indexes.get(0);
         showWindow();
         return;
       }
@@ -415,7 +415,7 @@ public class AnnotationEditor extends AbstractAction {
       classLists.setLayout(new GridLayout(classValues.size(), 1));
       for(int i = 0; i < classValues.size(); i++) {
         Icon icon =
-          isClass.get(i).booleanValue()
+          isClass.get(i)
             ? MainFrame.getIcon("ontology-class")
             : MainFrame.getIcon("ontology-instance");
         JMenuItem button = new JMenuItem(classValues.get(i), icon);
@@ -424,7 +424,7 @@ public class AnnotationEditor extends AbstractAction {
         button.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ae) {
             final int tempIndex = Integer.parseInt(ae.getActionCommand());
-            selectedAnnotationIndex = indexes1.get(tempIndex).intValue();
+            selectedAnnotationIndex = indexes1.get(tempIndex);
             classLists.setVisible(false);
             SwingUtilities.invokeLater(new Runnable() {
               public void run() {
@@ -452,7 +452,7 @@ public class AnnotationEditor extends AbstractAction {
     }
   }
 
-  ComboBoxModel model;
+  ComboBoxModel<ClassNode> model;
 
   boolean explicitCall = false;
 
@@ -476,7 +476,7 @@ public class AnnotationEditor extends AbstractAction {
     for(int i = 0; i < items.size(); i++) {
       nodes[i] = items.get(i);
     }
-    model = new DefaultComboBoxModel(nodes);
+    model = new DefaultComboBoxModel<>(nodes);
     typeCombo.setModel(model);
 
     enableDisableComponents(newAnnotationMode);
@@ -701,7 +701,7 @@ public class AnnotationEditor extends AbstractAction {
               null, options, options[0]);
           if(confirm == JOptionPane.YES_OPTION) {
             gate.Annotation annot =
-              (gate.Annotation)ontologyTreePanel.ontoTreeListener.highlightedAnnotations
+              ontologyTreePanel.ontoTreeListener.highlightedAnnotations
                 .get(selectedAnnotationIndex);
 
             if(annot != null) {
@@ -945,7 +945,7 @@ public class AnnotationEditor extends AbstractAction {
       int endOffset = annot.getEndNode().getOffset().intValue();
       FeatureMap features = annot.getFeatures();
       if(ontologyTreePanel.ontoViewer.getDocument().getContent().size()
-        .longValue() == endOffset) return;
+         == endOffset) return;
       endOffset++;
       String value =
         (String)features.get(ontologyTreePanel.ontologyViewerOptions

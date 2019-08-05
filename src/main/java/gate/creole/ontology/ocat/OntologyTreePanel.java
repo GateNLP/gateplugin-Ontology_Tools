@@ -175,9 +175,9 @@ public class OntologyTreePanel extends JPanel {
   private ClassNode getFirstClassNode(ClassNode node, String classValue) {
     if(node.toString().intern() == classValue.intern()) { return node; }
 
-    Iterator children = node.getChildren();
+    Iterator<ClassNode> children = node.getChildren();
     while(children.hasNext()) {
-      ClassNode tempNode = (ClassNode)children.next();
+      ClassNode tempNode = children.next();
       ClassNode returnedNode = getFirstClassNode(tempNode, classValue);
       if(returnedNode != null) { return returnedNode; }
     }
@@ -212,9 +212,9 @@ public class OntologyTreePanel extends JPanel {
       return cNodes;
     }
 
-    Iterator children = node.getChildren();
+    Iterator<ClassNode> children = node.getChildren();
     while(children.hasNext()) {
-      ClassNode tempNode = (ClassNode)children.next();
+      ClassNode tempNode = children.next();
       List<ClassNode> returnedNodes = getClassNode(tempNode, classValue);
       if(returnedNodes != null) {
         cNodes.addAll(returnedNodes);
@@ -229,7 +229,7 @@ public class OntologyTreePanel extends JPanel {
     // and now removing from the actual document
     AnnotationSet set = ontoViewer.getDocument().getAnnotations();
     if(!(set.remove(annot))) {
-      Map annotSetMap = ontoViewer.getDocument().getNamedAnnotationSets();
+      Map<String, AnnotationSet> annotSetMap = ontoViewer.getDocument().getNamedAnnotationSets();
       if(annotSetMap != null) {
         java.util.List<String> setNames =
           new ArrayList<String>(annotSetMap.keySet());
@@ -256,7 +256,7 @@ public class OntologyTreePanel extends JPanel {
 
   /** Returns the associated color for the given class */
   public Color getHighlightColor(String classVal) {
-    return (Color)currentOResource2ColorMap.get(classVal);
+    return currentOResource2ColorMap.get(classVal);
   }
 
   /** Initialize the GUI */

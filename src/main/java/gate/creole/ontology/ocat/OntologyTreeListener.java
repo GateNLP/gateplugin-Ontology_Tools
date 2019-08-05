@@ -482,7 +482,7 @@ public class OntologyTreeListener extends MouseAdapter {
 
       if(prop != null) {
         resource.addAnnotationPropertyValue(
-          (AnnotationProperty)prop, new Literal(value));
+          prop, new Literal(value));
       }
       else {
         // check that this URI isn't a class or instance
@@ -836,7 +836,7 @@ public class OntologyTreeListener extends MouseAdapter {
     Collections.sort(highAnns, new gate.util.OffsetComparator());
     annotationRange = new int[highAnns.size() * 2];
     for(int i = 0, j = 0; j < highAnns.size(); i += 2, j++) {
-      Annotation ann = (Annotation)highAnns.get(j);
+      Annotation ann = highAnns.get(j);
       annotationRange[i] = ann.getStartNode().getOffset().intValue();
       annotationRange[i + 1] = ann.getEndNode().getOffset().intValue();
     }

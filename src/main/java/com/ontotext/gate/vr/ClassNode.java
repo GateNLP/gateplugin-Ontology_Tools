@@ -87,9 +87,8 @@ public class ClassNode implements IFolder, Transferable, Cloneable,
 				OClass ocl = (OClass) parent.getSource();
 
 				// if we include instances, then get them too
-				if (includeInstances && (o instanceof Ontology)) {
-					Ontology kb = (Ontology) o;
-					Set<OInstance> instances = kb.getOInstances(ocl,
+				if (includeInstances) {
+					Set<OInstance> instances = o.getOInstances(ocl,
 							OConstants.Closure.DIRECT_CLOSURE);
 					if (instances != null && !instances.isEmpty()) {
 						Iterator<OInstance> insti = instances.iterator();
@@ -357,9 +356,8 @@ public class ClassNode implements IFolder, Transferable, Cloneable,
 				OClass c = (OClass) source;
 				if (sub.getSource() instanceof OClass)
 					c.removeSubClass((OClass) sub.getSource());
-				else if (sub.getSource() instanceof OInstance
-						&& c.getOntology() instanceof Ontology)
-					((Ontology) c.getOntology())
+				else if (sub.getSource() instanceof OInstance)
+					c.getOntology()
 							.removeOInstance((OInstance) sub.getSource());
 			} else if (source instanceof Ontology) {
 				Ontology o = (Ontology) source;
@@ -401,15 +399,14 @@ public class ClassNode implements IFolder, Transferable, Cloneable,
 					c.getOntology().addOClass((OURI) sc.getONodeID());
 					children.add(sub);
 				}
-				if (sub.getSource() instanceof OInstance
-						&& c.getOntology() instanceof Ontology) {
+				if (sub.getSource() instanceof OInstance) {
 					OInstance inst = (OInstance) sub.getSource();
-					if (!((Ontology) c.getOntology()).containsOInstance(inst
-							.getOURI())) {
+					if (!(c.getOntology().containsOInstance(inst
+							.getOURI()))) {
 						Iterator<OClass> instClasses = inst.getOClasses(
 								OConstants.Closure.DIRECT_CLOSURE).iterator();
 						while (instClasses.hasNext()) {
-							((Ontology) c.getOntology()).addOInstance(
+							c.getOntology().addOInstance(
 									inst.getOURI(), instClasses.next());
 						}
 					}

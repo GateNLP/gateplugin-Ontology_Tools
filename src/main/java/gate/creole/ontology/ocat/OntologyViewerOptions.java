@@ -40,6 +40,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import gate.AnnotationSet;
 import gate.Document;
 import gate.event.DocumentEvent;
 import gate.event.DocumentListener;
@@ -154,7 +155,7 @@ public class OntologyViewerOptions implements DocumentListener {
   /**
    * All annotations are listed under this annotationSet comboBox
    */
-  private JComboBox annotationSetsNamesCB;
+  private JComboBox<String> annotationSetsNamesCB;
 
   /**
    * Default AnnotationType, which is Mention and other available
@@ -180,7 +181,7 @@ public class OntologyViewerOptions implements DocumentListener {
    * All available annotation types, with a capability of adding new, are listed
    * under this annotationTypesComboBox
    */
-  private JComboBox annotationTypesCB;
+  private JComboBox<String> annotationTypesCB;
 
   /**
    * Instance of the main ontologyTreePanel
@@ -316,8 +317,8 @@ public class OntologyViewerOptions implements DocumentListener {
     classesToShowFilePathTF = new JTextField(15);
     browseClassesToShowFileButton = new JButton("Browse");
     saveClassesToShowFileButton = new JButton("Save");
-    annotationSetsNamesCB = new JComboBox();
-    annotationTypesCB = new JComboBox();
+    annotationSetsNamesCB = new JComboBox<>();
+    annotationTypesCB = new JComboBox<>();
     defaultAS = new JRadioButton();
     otherAS = new JRadioButton();
     mentionAT = new JRadioButton();
@@ -353,14 +354,14 @@ public class OntologyViewerOptions implements DocumentListener {
     // lets find out all the annotations
     Document document = ontologyTreePanel.ontoViewer.getDocument();
 
-    Map annotSetMap = document.getNamedAnnotationSets();
+    Map<String, AnnotationSet> annotSetMap = document.getNamedAnnotationSets();
     if(annotSetMap != null) {
-      java.util.List setNames = new ArrayList(annotSetMap.keySet());
+      java.util.List<String> setNames = new ArrayList<>(annotSetMap.keySet());
       if(setNames != null) {
         Collections.sort(setNames);
-        Iterator setsIter = setNames.iterator();
+        Iterator<String> setsIter = setNames.iterator();
         while(setsIter.hasNext()) {
-          String setName = (String)setsIter.next();
+          String setName = setsIter.next();
           annotationSetsNamesCB.addItem(setName);
           ontologyTreePanel.ontoViewer.getDocument().getAnnotations(setName)
             .addAnnotationSetListener(ontologyTreePanel.ontoViewer);
@@ -371,11 +372,11 @@ public class OntologyViewerOptions implements DocumentListener {
     annotationSetsNamesCB.setEditable(true);
 
 
-    Set types = document.getAnnotations().getAllTypes();
+    Set<String> types = document.getAnnotations().getAllTypes();
     if(types != null) {
-      Iterator iter = types.iterator();
+      Iterator<String> iter = types.iterator();
       while(iter.hasNext()) {
-        annotationTypesCB.addItem((String)iter.next());
+        annotationTypesCB.addItem(iter.next());
       }
     }
 
@@ -555,13 +556,13 @@ public class OntologyViewerOptions implements DocumentListener {
 
         // we need to change the annotationTypesCBcomp values as well
         annotationTypesCB.removeAllItems();
-        Set types =
+        Set<String> types =
           ontologyTreePanel.ontoViewer.getDocument().getAnnotations(
-            (String)item).getAllTypes();
+            item).getAllTypes();
         if(types != null) {
-          Iterator iter = types.iterator();
+          Iterator<String> iter = types.iterator();
           while(iter.hasNext()) {
-            annotationTypesCB.addItem((String)iter.next());
+            annotationTypesCB.addItem(iter.next());
           }
         }
 
@@ -592,14 +593,14 @@ public class OntologyViewerOptions implements DocumentListener {
 
         // we need to change the annotationTypesCB values as well
         annotationTypesCB.removeAllItems();
-        Set types =
+        Set<String> types =
           ontologyTreePanel.ontoViewer.getDocument().getAnnotations()
             .getAllTypes();
 
         if(types != null) {
-          Iterator iter = types.iterator();
+          Iterator<String> iter = types.iterator();
           while(iter.hasNext()) {
-            annotationTypesCB.addItem((String)iter.next());
+            annotationTypesCB.addItem(iter.next());
           }
         }
         annotationTypesCB.updateUI();
@@ -663,7 +664,7 @@ public class OntologyViewerOptions implements DocumentListener {
         }
 
         for(int i = 0; i < annotationTypesCB.getItemCount(); i++) {
-          if(item.equals((String)annotationTypesCB.getItemAt(i))) {
+          if(item.equals(annotationTypesCB.getItemAt(i))) {
             annotationTypesCB.setSelectedIndex(i);
             ontologyTreePanel.ontoTreeListener.refreshHighlights();
             return;

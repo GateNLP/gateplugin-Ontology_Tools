@@ -24,7 +24,7 @@ import com.ontotext.gate.vr.IFolder;
  * @version 1.0
  */
 @SuppressWarnings("rawtypes")
-public class ComboRenderer extends JPanel implements ListCellRenderer {
+public class ComboRenderer extends JPanel implements ListCellRenderer<ClassNode> {
 
   /**
    * Serial Version ID
@@ -75,12 +75,8 @@ public class ComboRenderer extends JPanel implements ListCellRenderer {
   /**
    * Renderer method
    */
-  public Component getListCellRendererComponent(JList list, Object value,
+  public Component getListCellRendererComponent(JList list, ClassNode item,
     int row, boolean isSelected, boolean hasFocus) {
-
-    Object userObject = value;
-    ClassNode item = (ClassNode)userObject;
-
     if(!(item instanceof IFolder)) {
       label.setBackground(Color.white);
       return this;

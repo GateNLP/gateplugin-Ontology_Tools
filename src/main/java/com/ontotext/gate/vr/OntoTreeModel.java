@@ -13,7 +13,7 @@ import java.util.Vector;
 public class OntoTreeModel implements TreeModel {
 
   private IFolder root;
-  private Vector treeModelListeners = new Vector();
+  private Vector<TreeModelListener> treeModelListeners = new Vector<>();
 
   public OntoTreeModel(IFolder root) {
       this.root = root;
@@ -65,7 +65,7 @@ public class OntoTreeModel implements TreeModel {
         TreeModelEvent e = new TreeModelEvent(this,
                                               new Object[] {oldRoot});
         for (int i = 0; i < len; i++) {
-            ((TreeModelListener)treeModelListeners.elementAt(i)).
+            treeModelListeners.elementAt(i).
                     treeStructureChanged(e);
         }
     }

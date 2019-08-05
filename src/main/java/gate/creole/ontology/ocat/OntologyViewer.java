@@ -54,7 +54,7 @@ public class OntologyViewer extends AbstractDocumentView implements
   private ArrayList<Ontology> ontologies;
 
   /** ComboBox used to display the ontology instances */
-  private JComboBox ontologyCB;
+  private JComboBox<String> ontologyCB;
 
   /** Panel to display ComboBox */
   private JPanel ontologyCBPanel;
@@ -142,7 +142,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     initLocalData();
 
     // first creating ontologyCB GUI
-    ontologyCB = new JComboBox();
+    ontologyCB = new JComboBox<>();
     ontologyCBPanel = new JPanel();
     ontologyCBPanel.setLayout(new FlowLayout());
     ontologyCBPanel.add(ontologyCB);
@@ -318,10 +318,10 @@ public class OntologyViewer extends AbstractDocumentView implements
       set = document.getAnnotations();
     }
     else {
-      Collection sets = document.getNamedAnnotationSets().values();
-      Iterator iter = sets.iterator();
+      Collection<AnnotationSet> sets = document.getNamedAnnotationSets().values();
+      Iterator<AnnotationSet> iter = sets.iterator();
       while(iter.hasNext()) {
-        AnnotationSet set1 = (AnnotationSet)iter.next();
+        AnnotationSet set1 = iter.next();
         if(set1.get(currentAnnot.getId()) != null) {
           set = set1;
           break;
@@ -330,7 +330,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     }
 
     Integer setId = null;
-    if(asID2ASName.values() != null && asID2ASName.values().contains(set)) {
+    if(asID2ASName.values().contains(set)) {
       Iterator<Integer> iter = asID2ASName.keySet().iterator();
       while(iter.hasNext()) {
         Integer tempId = iter.next();
@@ -567,7 +567,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     // and we need to remove the annotationSetListener as well
     AnnotationSet set = document.getAnnotations();
     set.removeAnnotationSetListener(this);
-    Map annotSetMap = document.getNamedAnnotationSets();
+    Map<String, AnnotationSet> annotSetMap = document.getNamedAnnotationSets();
     if(annotSetMap != null) {
       java.util.List<String> setNames =
         new ArrayList<String>(annotSetMap.keySet());
@@ -586,14 +586,14 @@ public class OntologyViewer extends AbstractDocumentView implements
   private void loadOntologies() {
     if(ontologies == null) {
       ontologies = new ArrayList<Ontology>();
-      java.util.List lrs = gate.Gate.getCreoleRegister().getPublicLrInstances();
-      Iterator iter1 = lrs.iterator();
+      java.util.List<LanguageResource> lrs = gate.Gate.getCreoleRegister().getPublicLrInstances();
+      Iterator<LanguageResource> iter1 = lrs.iterator();
       while(iter1.hasNext()) {
-        gate.LanguageResource lr = (LanguageResource)iter1.next();
+        gate.LanguageResource lr = iter1.next();
         if(!(lr instanceof Ontology)) continue;
         ((Ontology)lr).addOntologyModificationListener(this);
         ontologies.add((Ontology)lr);
-        ontologyCB.addItem(((Ontology)lr).getName());
+        ontologyCB.addItem(lr.getName());
       }
     }
   }
@@ -710,7 +710,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     if(resource instanceof Ontology) {
       int index = ontologies.indexOf((Ontology)resource);
       ontologyCB.remove(index);
-      ontologyCB.insertItemAt(((Ontology)resource).getName(), index);
+      ontologyCB.insertItemAt(resource.getName(), index);
       ontologyCB.invalidate();
     }
   }
@@ -812,12 +812,12 @@ public class OntologyViewer extends AbstractDocumentView implements
           anode.addSubNode(instNode);
           // here we need to set a color for this new instance
           ontologyTreePanel.setColorScheme(instNode,
-            (HashMap<String, Color>)ontologyTreePanel.ontology2ColorSchemesMap
+            ontologyTreePanel.ontology2ColorSchemesMap
               .get(ontology));
           ontologyTreePanel
             .setOntoTreeClassSelection(
               instNode,
-              (HashMap<String, Boolean>)ontologyTreePanel.ontology2OResourceSelectionMap
+              ontologyTreePanel.ontology2OResourceSelectionMap
                 .get(ontology));
         }
       }
