@@ -41,6 +41,8 @@ import gate.util.GateRuntimeException;
  */
 public class FeaturesEditor extends JPanel {
 
+  private static final long serialVersionUID = 2246836194714985837L;
+
   public FeaturesEditor() {
     setBackground(UIManager.getDefaults().getColor("Table.background"));
   }
@@ -272,6 +274,8 @@ public class FeaturesEditor extends JPanel {
 
   protected class FeatureEditorRenderer extends DefaultCellEditor implements
                                                                  TableCellRenderer {
+    private static final long serialVersionUID = -8186289926167592558L;
+
     @SuppressWarnings("unchecked")
     public FeatureEditorRenderer() {
       super(new JComboBox<Object>());
@@ -358,6 +362,8 @@ public class FeaturesEditor extends JPanel {
       rendererCombo.setOpaque(false);
 
       requiredIconLabel = new JLabel() {
+        private static final long serialVersionUID = -1141145362098150878L;
+
         public void repaint(long tm, int x, int y, int width, int height) {
         }
 
@@ -380,6 +386,8 @@ public class FeaturesEditor extends JPanel {
       requiredIconLabel.setToolTipText("Required feature");
 
       optionalIconLabel = new JLabel() {
+        private static final long serialVersionUID = 8897139956513451727L;
+
         public void repaint(long tm, int x, int y, int width, int height) {
         }
 
@@ -402,6 +410,8 @@ public class FeaturesEditor extends JPanel {
       optionalIconLabel.setToolTipText("Optional feature");
 
       nonSchemaIconLabel = new JLabel(MainFrame.getIcon("c")) {
+        private static final long serialVersionUID = -1105481158531806881L;
+
         public void repaint(long tm, int x, int y, int width, int height) {
         }
 

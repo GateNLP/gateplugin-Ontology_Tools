@@ -71,6 +71,8 @@ import gate.util.GateRuntimeException;
 @SuppressWarnings({"deprecation", "rawtypes"})
 public class AnnotationEditor extends AbstractAction {
 
+  private static final long serialVersionUID = -4876421794337382238L;
+
   protected JWindow annotationWindow;
 
   protected JComboBox<ClassNode> typeCombo;
