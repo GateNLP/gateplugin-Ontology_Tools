@@ -147,7 +147,7 @@ public class CheckRenderer extends JPanel implements TreeCellRenderer {
     // only once when that ontology is loaded for the first time
     if(ontologyTreePanel.currentOResource2ColorMap.containsKey(conceptName)) {
       Color color =
-        (Color)ontologyTreePanel.currentOResource2ColorMap.get(conceptName);
+        ontologyTreePanel.currentOResource2ColorMap.get(conceptName);
       labelPanel.setBackground(color);
       iconPanel.setBackground(Color.WHITE);
     }
