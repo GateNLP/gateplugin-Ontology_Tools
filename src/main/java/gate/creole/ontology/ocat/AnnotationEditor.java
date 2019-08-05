@@ -685,6 +685,8 @@ public class AnnotationEditor extends AbstractAction {
   // what to do when user selects to remove the annotation
   protected class DeleteAnnotationAction extends AbstractAction {
 
+    private static final long serialVersionUID = 1724682225276615529L;
+
     public DeleteAnnotationAction(Icon icon) {
       super("", icon);
     }
@@ -747,6 +749,8 @@ public class AnnotationEditor extends AbstractAction {
   // extend the annotation by one character on left
   protected class HideHighlightsAction extends AbstractAction {
 
+    private static final long serialVersionUID = 6313485485784816000L;
+
     public HideHighlightsAction(String caption) {
       super(caption);
     }
@@ -797,6 +801,8 @@ public class AnnotationEditor extends AbstractAction {
   // extend the annotation by one character on left
   protected class StartOffsetExtendLeftAction extends AbstractAction {
 
+    private static final long serialVersionUID = 1902199317062898297L;
+
     public StartOffsetExtendLeftAction(Icon icon) {
       super("", icon);
     }
@@ -845,6 +851,8 @@ public class AnnotationEditor extends AbstractAction {
 
   // extend the annotation by one character on left
   protected class StartOffsetExtendRightAction extends AbstractAction {
+    private static final long serialVersionUID = -9208256091440684319L;
+
     public StartOffsetExtendRightAction(Icon icon) {
       super("", icon);
     }
@@ -886,6 +894,8 @@ public class AnnotationEditor extends AbstractAction {
 
   // extend the annotation by one character on left
   protected class EndOffsetExtendLeftAction extends AbstractAction {
+
+    private static final long serialVersionUID = -3853893441754779700L;
 
     public EndOffsetExtendLeftAction(Icon icon) {
       super("", icon);
@@ -933,6 +943,8 @@ public class AnnotationEditor extends AbstractAction {
 
   // extend the annotation by one character on left
   protected class EndOffsetExtendRightAction extends AbstractAction {
+    private static final long serialVersionUID = 2552380018382785306L;
+
     public EndOffsetExtendRightAction(Icon icon) {
       super("", icon);
     }
@@ -976,6 +988,8 @@ public class AnnotationEditor extends AbstractAction {
   }
 
   protected class CancelAction extends AbstractAction {
+    private static final long serialVersionUID = 2099219781069638786L;
+
     public CancelAction(Icon icon) {
       super("", icon);
     }
