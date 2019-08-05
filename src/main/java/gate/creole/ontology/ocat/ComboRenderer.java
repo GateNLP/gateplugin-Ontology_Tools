@@ -77,11 +77,6 @@ public class ComboRenderer extends JPanel implements ListCellRenderer<ClassNode>
    */
   public Component getListCellRendererComponent(JList list, ClassNode item,
     int row, boolean isSelected, boolean hasFocus) {
-    if(!(item instanceof IFolder)) {
-      label.setBackground(Color.white);
-      return this;
-    }
-
     String conceptName = item.getSource().toString();
     iconLabel.setVisible(true);
 
