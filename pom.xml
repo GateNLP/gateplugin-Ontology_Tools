@@ -62,6 +62,14 @@
 			<version>8.5</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- findbugs annotations - needed at compile time only, not runtime -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<name>Ontology Tools</name>

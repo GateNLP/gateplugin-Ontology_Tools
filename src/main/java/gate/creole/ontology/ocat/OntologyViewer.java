@@ -7,6 +7,7 @@
  */
 package gate.creole.ontology.ocat;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import gate.gui.docview.AbstractDocumentView;
 import javax.swing.*;
 
@@ -37,6 +38,9 @@ import gate.gui.docview.*;
  * 
  * @author niraj
  */
+@SuppressFBWarnings(value = "NP_NULL_ON_SOME_PATH",
+        justification = "TDV.getGui will not be null here, and annotation set cannot be null " +
+                "since every annotation must have come from some annotation set")
 public class OntologyViewer extends AbstractDocumentView implements
                                                         CreoleListener,
                                                         AnnotationSetListener,
