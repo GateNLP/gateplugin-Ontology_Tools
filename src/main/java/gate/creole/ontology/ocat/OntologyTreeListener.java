@@ -795,12 +795,12 @@ public class OntologyTreeListener extends MouseAdapter {
           Annotation ann = (Annotation)annotationsList.get(j);
           if(ann.getType().equals(typeToMatch)) {
             String set = ontologyTreePanel.ontoViewer.getAnnotationSet(ann);
-            if(set == null
+            if((set == null || "".equals(set))
               && setToMatch
                 .equals(OntologyViewerOptions.DEFAULT_ANNOTATION_SET)) {
               // do nothing
             }
-            else if(set != null && set.equals(setToMatch)) {
+            else if((set != null && !"".equals(set)) && set.equals(setToMatch)) {
               // so nothing
             }
             else {
