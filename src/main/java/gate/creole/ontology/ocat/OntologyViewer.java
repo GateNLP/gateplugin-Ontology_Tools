@@ -330,7 +330,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     }
 
     Integer setId = null;
-    if(asID2ASName.values().contains(set)) {
+    if(asID2ASName.values().contains(set.getName())) {
       Iterator<Integer> iter = asID2ASName.keySet().iterator();
       while(iter.hasNext()) {
         Integer tempId = iter.next();
@@ -342,7 +342,7 @@ public class OntologyViewer extends AbstractDocumentView implements
       }
     }
     else {
-      setId = new Integer(highestASID);
+      setId = highestASID;
       highestASID++;
       asID2ASName.put(setId, set.getName());
     }
@@ -413,7 +413,7 @@ public class OntologyViewer extends AbstractDocumentView implements
     // make entry in annotationsID2ASID
     AnnotationSet set = (AnnotationSet)ase.getSource();
     Integer setId = null;
-    if(asID2ASName.values() != null && asID2ASName.values().contains(set)) {
+    if(asID2ASName.values().contains(set.getName())) {
       Iterator<Integer> iter = asID2ASName.keySet().iterator();
       while(iter.hasNext()) {
         Integer tempId = iter.next();

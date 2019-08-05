@@ -784,7 +784,7 @@ public class AnnotationEditor extends AbstractAction {
           ontologyTreePanel.ontoTreeListener.setChildrenSelection(node, false);
         }
         else {
-          ontologyTreePanel.setSelected(node.toString(), false);
+          ontologyTreePanel.setSelected(node == null ? null : node.toString(), false);
         }
 
         TreePath path = ontologyTreePanel.ontoTreeListener.getTreePath(node);
