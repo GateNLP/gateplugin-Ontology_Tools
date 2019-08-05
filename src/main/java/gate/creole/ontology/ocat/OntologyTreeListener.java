@@ -202,7 +202,7 @@ public class OntologyTreeListener extends MouseAdapter {
             if(!disabled) {
               Ontology ontology = ontologyTreePanel.getCurrentOntology();
               OResource aClass =
-                (OClass)ontology.getOResourceByName(node.toString());
+                ontology.getOResourceByName(node.toString());
               classNames.add(node.toString());
               if(aClass instanceof OClass) {
                 Set<OClass> classes =
@@ -238,7 +238,7 @@ public class OntologyTreeListener extends MouseAdapter {
             if(!disabled) {
               Ontology ontology = ontologyTreePanel.getCurrentOntology();
               OResource aClass =
-                (OClass)ontology.getOResourceByName(node.toString());
+                ontology.getOResourceByName(node.toString());
               classNames.add(node.toString());
               if(aClass instanceof OClass) {
                 Set<OClass> classes =
@@ -274,7 +274,7 @@ public class OntologyTreeListener extends MouseAdapter {
             if(!disabled) {
               Ontology ontology = ontologyTreePanel.getCurrentOntology();
               OResource aClass =
-                (OClass)ontology.getOResourceByName(node.toString());
+                ontology.getOResourceByName(node.toString());
               classNames.add(node.toString());
               if(aClass instanceof OClass) {
                 Set<OClass> classes =
@@ -310,7 +310,7 @@ public class OntologyTreeListener extends MouseAdapter {
             if(!disabled) {
               Ontology ontology = ontologyTreePanel.getCurrentOntology();
               OResource aClass =
-                (OClass)ontology.getOResourceByName(node.toString());
+                ontology.getOResourceByName(node.toString());
               classNames.add(node.toString());
               if(aClass instanceof OClass) {
                 Set<OClass> classes =
@@ -687,8 +687,8 @@ public class OntologyTreeListener extends MouseAdapter {
 
     for(int i = 0; i < offsets.size(); i++) {
 
-      start = (((Integer[])offsets.get(i))[0]).intValue();
-      end = (((Integer[])offsets.get(i))[1]).intValue();
+      start = offsets.get(i)[0];
+      end = offsets.get(i)[1];
 
       try {
 
@@ -768,7 +768,7 @@ public class OntologyTreeListener extends MouseAdapter {
         continue;
       }
 
-      if(!currentClass2IsSelectedMap.get(className).booleanValue()) {
+      if(!currentClass2IsSelectedMap.get(className)) {
         continue;
       }
 
@@ -792,7 +792,7 @@ public class OntologyTreeListener extends MouseAdapter {
           ontologyTreePanel.ontologyViewerOptions
             .getSelectedAnnotationSetName();
         for(int j = 0; j < annotationsList.size(); j++) {
-          Annotation ann = (Annotation)annotationsList.get(j);
+          Annotation ann = annotationsList.get(j);
           if(ann.getType().equals(typeToMatch)) {
             String set = ontologyTreePanel.ontoViewer.getAnnotationSet(ann);
             if((set == null || "".equals(set))
