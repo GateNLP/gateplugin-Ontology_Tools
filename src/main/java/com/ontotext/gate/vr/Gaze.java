@@ -3,22 +3,83 @@
  */
 package com.ontotext.gate.vr;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import gate.creole.*;
-import gate.creole.gazetteer.*;
-import gate.creole.ontology.*;
-import gate.util.*;
+import gate.creole.AbstractVisualResource;
+import gate.creole.ResourceInstantiationException;
+import gate.creole.ResourceReference;
+import gate.creole.gazetteer.Gazetteer;
+import gate.creole.gazetteer.GazetteerEvent;
+import gate.creole.gazetteer.GazetteerList;
+import gate.creole.gazetteer.GazetteerListener;
+import gate.creole.gazetteer.LinearDefinition;
+import gate.creole.gazetteer.LinearNode;
+import gate.creole.gazetteer.MappingDefinition;
+import gate.creole.gazetteer.MappingNode;
+import gate.creole.gazetteer.OntoGazetteer;
+import gate.creole.ontology.OClass;
+import gate.creole.ontology.OResource;
+import gate.creole.ontology.Ontology;
+import gate.creole.ontology.OntologyModificationListener;
+import gate.creole.ontology.OntologyUtilities;
+import gate.creole.ontology.RDFProperty;
 import gate.event.GateEvent;
 import gate.gui.MainFrame;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.net.*;
-import java.io.*;
+import gate.util.Err;
+import gate.util.GateRuntimeException;
 
 /** Gaze is a Gazetteer VR capable of viewing and editing
  *  gazetteer lists, linear definitions (lists.def files),
@@ -336,8 +397,17 @@ public class Gaze extends AbstractVisualResource
       throw new GateRuntimeException(
         "The set of Gazetteer Lists should not be null.");
 
+    List<LinearNode> nodes = linear.getNodes();
+    Collections.sort(nodes, new Comparator<LinearNode>() {
+
+		@Override
+		public int compare(LinearNode o1, LinearNode o2) {
+			return o1.getList().compareTo(o2.getList());
+		}
+	});
+    
     // set the list data with the nodes of the gaz
-    linearList.setListData(new Vector(linear.getNodes()));
+    linearList.setListData(new Vector(nodes));
   } // displayLinear()
 
   /** Displays mapping
@@ -587,7 +657,7 @@ public class Gaze extends AbstractVisualResource
     try {
       target.setListsURL(new ResourceReference(linear.getURL()));
       if (isOntoGaz) {
-        ((OntoGazetteer)target).setMappingURL(mapping.getURL());
+        ((OntoGazetteer)target).setMappingURL(new ResourceReference(mapping.getURL()));
         gate.Factory.deleteResource(((OntoGazetteer)target).getGazetteer());
       } // if onto gaz
       target = (Gazetteer)target.init();
